@@ -29,32 +29,19 @@ DATA = {
 #   }
 # }
 
-def omlet_page(request, servings):
-    omlets = {
-        'omlet': {
-            'яйца, шт': 2 * int(servings),
-            'молоко, л': 0.1 * float(servings),
-            'соль, ч.л.': 0.5 * float(servings),
-        }
-    }
-    return render(request, 'index.html', omlets)
 
-def pasta_page(request, servings):
-    pastas = {
-        'pasta': {
-            'макароны, г': 0.3 * float(servings),
-            'сыр, г': 0.05 * float(servings),
-        }
-    }
-    return render(request, 'index.html', pastas)
+def select_recipes(request, select_recipes, servings):
 
-def buter_page(request, servings):
-    buters = {
-        'buter': {
-            'хлеб, ломтик': 1 * int(servings),
-            'колбаса, ломтик': 1 * int(servings),
-            'сыр, ломтик': 1 * int(servings),
-            'помидор, ломтик': 1 * int(servings),
-        }
+    rec = DATA.get(select_recipes)
+    while float(servings) > 1.00:
+        for val in rec.values():
+            float(val) * servings
+    # на этом этапе я не могу сообразить, как мне перебрать значения словаря и умножить на servings
+    context = {
+        'page': rec
     }
-    return render(request, 'index.html', buters)
+
+    return render(request, 'index.html', context)
+
+
+
