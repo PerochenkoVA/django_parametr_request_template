@@ -35,7 +35,7 @@ def select_recipes(request, select_recipes, servings):
     rec = DATA.get(select_recipes)
     while float(servings) > 1.00:
         for val in rec.values():
-            float(val) * servings
+            rec = float(val) * servings
     # на этом этапе я не могу сообразить, как мне перебрать значения словаря и умножить на servings
     context = {
         'page': rec
